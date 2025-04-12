@@ -46,12 +46,10 @@ export default function Index() {
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent"
       >
         <div className="container mx-auto py-4 px-4 md:px-8 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img 
-              src="/clinisync-logo.png" 
-              alt="CliniSync" 
-              className="w-12 h-12 object-contain rounded-lg"
-            />
+          <div className="flex items-center gap-2">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-clinic-500 to-clinic-400 flex items-center justify-center text-white font-bold text-xl">
+              CS
+            </div>
             <span className="text-2xl font-bold text-gradient">CliniSync</span>
           </div>
           
@@ -62,8 +60,7 @@ export default function Index() {
             <a href="#contact" className="text-gray-700 hover:text-clinic-500 transition-colors">Contact</a>
           </nav>
           
-          <Button variant="default" size="lg" className="bg-clinic-500 hover:bg-clinic-600 hidden md:flex" 
-                  onClick={() => window.open("https://github.com/badhan-tech-museum/Clini-Sync/releases/tag/Clini_Sync_App_Release", "_blank")}>
+          <Button variant="default" size="lg" className="bg-clinic-500 hover:bg-clinic-600 hidden md:flex">
             <Download className="w-4 h-4 mr-2" />
             Download App
           </Button>
@@ -110,11 +107,7 @@ export default function Index() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
               >
-                <Button 
-                  size="lg" 
-                  className="bg-clinic-500 hover:bg-clinic-600"
-                  onClick={() => window.open("https://github.com/badhan-tech-museum/Clini-Sync/releases/tag/Clini_Sync_App_Release", "_blank")}
-                >
+                <Button size="lg" className="bg-clinic-500 hover:bg-clinic-600">
                   <Download className="w-4 h-4 mr-2" />
                   Download App
                 </Button>
@@ -351,12 +344,7 @@ export default function Index() {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <AnimatedSection delay={0.2}>
-              <Button 
-                size="lg" 
-                variant="secondary" 
-                className="bg-white text-clinic-500 hover:bg-gray-100 text-lg px-8 py-6 h-auto"
-                onClick={() => window.open("https://github.com/badhan-tech-museum/Clini-Sync/releases/tag/Clini_Sync_App_Release", "_blank")}
-              >
+              <Button size="lg" variant="secondary" className="bg-white text-clinic-500 hover:bg-gray-100 text-lg px-8 py-6 h-auto">
                 <Download className="w-5 h-5 mr-2" />
                 Download for Android
               </Button>
@@ -518,11 +506,9 @@ export default function Index() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <img 
-                  src="/clinisync-logo.png" 
-                  alt="CliniSync" 
-                  className="w-10 h-10 rounded-lg object-contain bg-white p-1"
-                />
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-clinic-500 to-clinic-400 flex items-center justify-center text-white font-bold text-xl">
+                  CS
+                </div>
                 <span className="text-2xl font-bold">CliniSync</span>
               </div>
               <p className="text-gray-400 mb-4">
