@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ThreeDModel from '@/components/ThreeDModel';
 import PhoneMockup from '@/components/PhoneMockup';
@@ -10,13 +10,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   UserRound, Users, Shield, Clock, Calendar, ClipboardList, 
   QrCode, Smartphone, CheckCircle, UserPlus, Building, Download,
-  Mail, Phone, MapPin, User
+  Mail, Phone, MapPin, User, Send
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import ContactForm from '@/components/ContactForm';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Index() {
+  const { toast } = useToast();
   const headerRef = useRef<HTMLElement>(null);
   const heroTextRef = useRef<HTMLHeadingElement>(null);
   const heroSubtitleRef = useRef<HTMLParagraphElement>(null);
@@ -454,47 +457,7 @@ export default function Index() {
           
           <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
             <AnimatedSection delay={0.2}>
-              <form className="space-y-6 bg-white p-8 rounded-2xl shadow-lg">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-clinic-500 focus:border-clinic-500 transition"
-                    placeholder="Badhan Paul"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-clinic-500 focus:border-clinic-500 transition"
-                    placeholder="badhan.tech.museum.dev@gmail.com"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-clinic-500 focus:border-clinic-500 transition"
-                    placeholder="How can we help you?"
-                  ></textarea>
-                </div>
-                
-                <Button className="w-full bg-clinic-500 hover:bg-clinic-600">
-                  Send Message
-                </Button>
-              </form>
+              <ContactForm />
             </AnimatedSection>
             
             <AnimatedSection delay={0.4}>
