@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ThreeDModel from '@/components/ThreeDModel';
@@ -6,6 +5,8 @@ import PhoneMockup from '@/components/PhoneMockup';
 import AnimatedSection from '@/components/AnimatedSection';
 import FeatureCard from '@/components/FeatureCard';
 import StepCard from '@/components/StepCard';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   UserRound, Users, Shield, Clock, Calendar, ClipboardList, 
   QrCode, Smartphone, CheckCircle, UserPlus, Building, Download,
@@ -13,8 +14,13 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Index() {
   const headerRef = useRef<HTMLElement>(null);
+  const heroTextRef = useRef<HTMLHeadingElement>(null);
+  const heroSubtitleRef = useRef<HTMLParagraphElement>(null);
+  const heroActionsRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
 
   const opacity = useTransform(scrollY, [0, 100], [1, 0.8]);
@@ -38,9 +44,74 @@ export default function Index() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const heroTitle = heroTextRef.current;
+    const heroSubtitle = heroSubtitleRef.current;
+    const heroActions = heroActionsRef.current;
+
+    if (heroTitle && heroSubtitle && heroActions) {
+      const tl = gsap.timeline();
+      
+      tl.from(heroTitle, {
+        duration: 1,
+        opacity: 0,
+        y: 30,
+        ease: "power3.out"
+      })
+      .from(heroSubtitle, {
+        duration: 1,
+        opacity: 0,
+        y: 20,
+        ease: "power3.out"
+      }, "-=0.6")
+      .from(heroActions, {
+        duration: 0.8,
+        opacity: 0,
+        y: 20,
+        ease: "power3.out"
+      }, "-=0.6");
+    }
+
+    const sections = document.querySelectorAll('.gsap-section');
+    
+    sections.forEach((section) => {
+      gsap.from(section, {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        },
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+      });
+    });
+
+    const headings = document.querySelectorAll('.gsap-heading');
+    
+    headings.forEach((heading) => {
+      gsap.from(heading, {
+        scrollTrigger: {
+          trigger: heading,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        },
+        duration: 1,
+        opacity: 0,
+        y: 20,
+        ease: "power3.out"
+      });
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-clinic-50/50 to-white overflow-x-hidden">
-      {/* Header */}
       <header 
         ref={headerRef}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent"
@@ -77,7 +148,6 @@ export default function Index() {
         </div>
       </header>
       
-      {/* Hero Section */}
       <section className="relative min-h-screen pt-20 md:pt-0 flex items-center hero-gradient overflow-hidden">
         <div className="container mx-auto px-4 md:px-8 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -85,28 +155,22 @@ export default function Index() {
               style={{ opacity, y: translateY }}
               className="text-center md:text-left"
             >
-              <motion.h1 
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+              <h1 
+                ref={heroTextRef}
                 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
               >
                 Connecting <span className="text-gradient">Healthcare</span> Professionals
-              </motion.h1>
+              </h1>
               
-              <motion.p 
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+              <p 
+                ref={heroSubtitleRef}
                 className="text-lg text-gray-600 mb-8 max-w-lg md:mx-0 mx-auto"
               >
                 CliniSync seamlessly connects doctors and healthcare organizations with secure profiles, patient management, and efficient scheduling.
-              </motion.p>
+              </p>
               
-              <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
+              <div 
+                ref={heroActionsRef}
                 className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
               >
                 <Button size="lg" className="bg-clinic-500 hover:bg-clinic-600">
@@ -115,11 +179,7 @@ export default function Index() {
                     Download App
                   </a>
                 </Button>
-                <Button size="lg" variant="outline" className="border-clinic-500 text-clinic-500">
-                  <QrCode className="w-4 h-4 mr-2" />
-                  Scan QR Code
-                </Button>
-              </motion.div>
+              </div>
             </motion.div>
             
             <div className="relative">
@@ -149,15 +209,12 @@ export default function Index() {
         />
       </section>
       
-      {/* App Preview Section */}
-      <section className="py-20 relative overflow-hidden bg-white">
+      <section className="py-20 relative overflow-hidden bg-white gsap-section">
         <div className="container mx-auto px-4 md:px-8">
-          <AnimatedSection className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Seamless Healthcare Collaboration</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              CliniSync brings doctors and healthcare facilities together with a secure, efficient platform.
-            </p>
-          </AnimatedSection>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">Seamless Healthcare Collaboration</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-12">
+            CliniSync brings doctors and healthcare facilities together with a secure, efficient platform.
+          </p>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <AnimatedSection delay={0.3}>
@@ -191,17 +248,14 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 bg-gradient-to-b from-white to-clinic-50/30">
+      <section id="features" className="py-20 bg-gradient-to-b from-white to-clinic-50/30 gsap-section">
         <div className="container mx-auto px-4 md:px-8">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Powerful Features for Healthcare Professionals
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              CliniSync provides specialized tools for both doctors and healthcare organizations.
-            </p>
-          </AnimatedSection>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
+            Powerful Features for Healthcare Professionals
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16">
+            CliniSync provides specialized tools for both doctors and healthcare organizations.
+          </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <FeatureCard 
@@ -244,17 +298,14 @@ export default function Index() {
         </div>
       </section>
       
-      {/* How It Works Section */}
-      <section id="howitworks" className="py-20 bg-gradient-to-b from-clinic-50/30 to-white">
+      <section id="howitworks" className="py-20 bg-gradient-to-b from-clinic-50/30 to-white gsap-section">
         <div className="container mx-auto px-4 md:px-8">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              How CliniSync Works
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Simple steps to connect healthcare professionals with organizations.
-            </p>
-          </AnimatedSection>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
+            How CliniSync Works
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16">
+            Simple steps to connect healthcare professionals with organizations.
+          </p>
           
           <div className="grid md:grid-cols-2 gap-12">
             <div>
@@ -328,8 +379,7 @@ export default function Index() {
         </div>
       </section>
       
-      {/* Download Section */}
-      <section id="download" className="py-20 bg-gradient-to-r from-clinic-500 to-clinic-600 text-white relative overflow-hidden">
+      <section id="download" className="py-20 bg-gradient-to-r from-clinic-500 to-clinic-600 text-white relative overflow-hidden gsap-section">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-40 h-40 rounded-full bg-white"></div>
           <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-white"></div>
@@ -337,14 +387,12 @@ export default function Index() {
         </div>
         
         <div className="container mx-auto px-4 md:px-8 relative z-10">
-          <AnimatedSection className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Get Started with CliniSync Today
-            </h2>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              Download the app now and transform how you connect with healthcare professionals.
-            </p>
-          </AnimatedSection>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
+            Get Started with CliniSync Today
+          </h2>
+          <p className="text-xl opacity-90 max-w-2xl mx-auto text-center mb-12">
+            Download the app now and transform how you connect with healthcare professionals.
+          </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <AnimatedSection delay={0.2}>
@@ -355,28 +403,18 @@ export default function Index() {
                 </Button>
               </a>
             </AnimatedSection>
-            
-            <AnimatedSection delay={0.4}>
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10 text-lg px-8 py-6 h-auto">
-                <QrCode className="w-5 h-5 mr-2" />
-                Scan QR Code
-              </Button>
-            </AnimatedSection>
           </div>
         </div>
       </section>
       
-      {/* Developer Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white gsap-section">
         <div className="container mx-auto px-4 md:px-8">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Development Team
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Meet the minds behind CliniSync
-            </p>
-          </AnimatedSection>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
+            Development Team
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16">
+            Meet the minds behind CliniSync
+          </p>
           
           <div className="max-w-md mx-auto bg-clinic-50 rounded-2xl p-8 shadow-lg">
             <div className="flex flex-col items-center text-center">
@@ -405,17 +443,14 @@ export default function Index() {
         </div>
       </section>
       
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-clinic-50/60">
+      <section id="contact" className="py-20 bg-clinic-50/60 gsap-section">
         <div className="container mx-auto px-4 md:px-8">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Contact Us
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Have questions about CliniSync? Get in touch with our team.
-            </p>
-          </AnimatedSection>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
+            Contact Us
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16">
+            Have questions about CliniSync? Get in touch with our team.
+          </p>
           
           <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
             <AnimatedSection delay={0.2}>
@@ -506,7 +541,6 @@ export default function Index() {
         </div>
       </section>
       
-      {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -562,7 +596,7 @@ export default function Index() {
                 </a>
                 <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-clinic-500 transition">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
                   </svg>
                 </a>
               </div>
