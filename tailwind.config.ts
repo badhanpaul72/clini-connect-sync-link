@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -14,6 +15,10 @@ export default {
 			center: true,
 			padding: '2rem',
 			screens: {
+				'sm': '640px',
+				'md': '768px',
+				'lg': '1024px',
+				'xl': '1280px',
 				'2xl': '1400px'
 			}
 		},
@@ -61,7 +66,19 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+                clinic: {
+                    50: "#E3F2F9",
+                    100: "#C5E4F3",
+                    200: "#A2D4EC",
+                    300: "#7AC1E4",
+                    400: "#47A9DA",
+                    500: "#0088CC",
+                    600: "#007AB8",
+                    700: "#006BA1",
+                    800: "#005885",
+                    900: "#003F5E",
+                }
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,12 +101,42 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+                'float': {
+                    '0%, 100%': {
+                        transform: 'translateY(0)'
+                    },
+                    '50%': {
+                        transform: 'translateY(-10px)'
+                    }
+                },
+                'pulse-soft': {
+                    '0%, 100%': {
+                        opacity: 1
+                    },
+                    '50%': {
+                        opacity: 0.8
+                    }
+                },
+                'rotate-slow': {
+                    '0%': {
+                        transform: 'rotate(0deg)'
+                    },
+                    '100%': {
+                        transform: 'rotate(360deg)'
+                    }
+                }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+                'float': 'float 3s ease-in-out infinite',
+                'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                'rotate-slow': 'rotate-slow 12s linear infinite'
+			},
+            fontFamily: {
+                'sans': ['Poppins', 'sans-serif'],
+            },
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
