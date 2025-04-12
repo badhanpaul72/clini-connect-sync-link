@@ -62,7 +62,9 @@ export default function Index() {
           
           <Button variant="default" size="lg" className="bg-clinic-500 hover:bg-clinic-600 hidden md:flex">
             <Download className="w-4 h-4 mr-2" />
-            Download App
+            <a href="https://github.com/badhan-tech-museum/Clini-Sync/releases/tag/Clini_Sync_App_Release" target="_blank" rel="noopener noreferrer" className="text-white">
+              Download App
+            </a>
           </Button>
           
           <div className="md:hidden">
@@ -109,7 +111,9 @@ export default function Index() {
               >
                 <Button size="lg" className="bg-clinic-500 hover:bg-clinic-600">
                   <Download className="w-4 h-4 mr-2" />
-                  Download App
+                  <a href="https://github.com/badhan-tech-museum/Clini-Sync/releases/tag/Clini_Sync_App_Release" target="_blank" rel="noopener noreferrer" className="text-white">
+                    Download App
+                  </a>
                 </Button>
                 <Button size="lg" variant="outline" className="border-clinic-500 text-clinic-500">
                   <QrCode className="w-4 h-4 mr-2" />
@@ -344,10 +348,12 @@ export default function Index() {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <AnimatedSection delay={0.2}>
-              <Button size="lg" variant="secondary" className="bg-white text-clinic-500 hover:bg-gray-100 text-lg px-8 py-6 h-auto">
-                <Download className="w-5 h-5 mr-2" />
-                Download for Android
-              </Button>
+              <a href="https://github.com/badhan-tech-museum/Clini-Sync/releases/tag/Clini_Sync_App_Release" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" variant="secondary" className="bg-white text-clinic-500 hover:bg-gray-100 text-lg px-8 py-6 h-auto">
+                  <Download className="w-5 h-5 mr-2" />
+                  Download for Android
+                </Button>
+              </a>
             </AnimatedSection>
             
             <AnimatedSection delay={0.4}>
