@@ -438,7 +438,7 @@ export default function Index() {
                 </div>
                 <div className="flex items-center gap-3 text-gray-700">
                   <MapPin className="w-5 h-5 text-clinic-500" />
-                  <span>Tank More,Balurghat,D/Dinajpur,WB,IN, PIN-733103</span>
+                  <span>Tank More,Balurghat,D/Dinajpur \n WB,IN, PIN-733103</span>
                 </div>
               </div>
             </div>
