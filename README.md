@@ -1,5 +1,5 @@
 # Welcome to your Lovable project
-$${\color{yellow}red}$$
+<span style="color:purple; font-weight:bold; background-color:yellow">Purple bold text with yellow background</span>
 ## Project info
 
 **URL**: https://lovable.dev/projects/a6ac5060-1a52-4069-8d8f-4c1b207b5d62
