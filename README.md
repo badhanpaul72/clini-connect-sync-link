@@ -1,5 +1,4 @@
-# Welcome to your Lovable project
-<code style="color: red;">This is red text.</code>
+# Welcome to your Lovable project text in orange
 ## Project info
 
 **URL**: https://lovable.dev/projects/a6ac5060-1a52-4069-8d8f-4c1b207b5d62
