@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ThreeDModel from '@/components/ThreeDModel';
@@ -235,6 +234,33 @@ export default function Index() {
         />
       </section>
       
+      {/* Add new Tutorial Videos Section here - above the Seamless Healthcare Collaboration section */}
+      <section id="tutorials" className="py-20 bg-gradient-to-b from-purple-900 to-indigo-900 gsap-section">
+        <div className="container mx-auto px-4 md:px-8 relative">
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-purple-400/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-1/4 w-64 h-64 bg-indigo-400/10 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading text-white">
+              Video Tutorials
+            </h2>
+            <p className="text-lg text-purple-200 max-w-2xl mx-auto text-center mb-8 gsap-text">
+              Learn how to set up and use the CliniSync app with our detailed video guides.
+            </p>
+            
+            <div className="flex justify-center mb-12">
+              <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-indigo-300 rounded-full"></div>
+            </div>
+            
+            <div className="max-w-4xl mx-auto">
+              <TutorialVideos />
+            </div>
+          </div>
+        </div>
+      </section>
+      
       <section className="py-20 relative overflow-hidden bg-white gsap-section">
         <div className="container mx-auto px-4 md:px-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">Seamless Healthcare Collaboration</h2>
@@ -401,22 +427,6 @@ export default function Index() {
                 />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Add new Tutorial Videos Section */}
-      <section id="tutorials" className="py-20 bg-gradient-to-b from-white to-clinic-50/30 gsap-section">
-        <div className="container mx-auto px-4 md:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
-            Video Tutorials
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16 gsap-text">
-            Learn how to set up and use the CliniSync app with our detailed video guides.
-          </p>
-          
-          <div className="max-w-4xl mx-auto">
-            <TutorialVideos />
           </div>
         </div>
       </section>
