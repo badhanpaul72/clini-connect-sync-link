@@ -7,7 +7,7 @@ import {
   Environment, 
   PresentationControls,
   Float,
-  Text3D,
+  Text,
   Center
 } from '@react-three/drei';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -176,7 +176,7 @@ function MedicalModel() {
   );
 }
 
-// Floating text component
+// Floating text component - replaced Text3D with Text to avoid external font dependencies
 function FloatingText() {
   return (
     <Float
@@ -185,21 +185,18 @@ function FloatingText() {
       floatIntensity={1}
     >
       <Center position={[0, -2.5, 0]}>
-        <Text3D
-          font="/fonts/helvetiker_regular.typeface.json"
-          size={0.5}
-          height={0.1}
-          curveSegments={12}
+        <Text
+          fontSize={1}
+          color="#0088CC"
+          anchorX="center"
+          anchorY="middle"
+          font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+          outlineWidth={0.02}
+          outlineColor="#0088CC"
+          material-toneMapped={false}
         >
           CliniSync
-          <meshStandardMaterial 
-            color="#0088CC" 
-            emissive="#0088CC"
-            emissiveIntensity={0.5}
-            metalness={0.8}
-            roughness={0.2}
-          />
-        </Text3D>
+        </Text>
       </Center>
     </Float>
   );

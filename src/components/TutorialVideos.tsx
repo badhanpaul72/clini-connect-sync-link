@@ -30,16 +30,13 @@ const Video = ({ title, embedId, description }: VideoProps) => {
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
       >
         <AspectRatio ratio={16 / 9} className="bg-black/40">
-          <div className="relative w-full h-full">
-            <iframe
-              className="w-full h-full"
-              src={`https://www.youtube.com/embed/${embedId}?rel=0`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-            <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-transparent pointer-events-none"></div>
-          </div>
+          <iframe
+            className="w-full h-full"
+            src={`https://www.youtube.com/embed/${embedId}?rel=0&autoplay=0`}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </AspectRatio>
       </motion.div>
     </motion.div>
