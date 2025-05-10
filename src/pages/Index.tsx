@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ThreeDModel from '@/components/ThreeDModel';
@@ -5,6 +6,7 @@ import PhoneMockup from '@/components/PhoneMockup';
 import AnimatedSection from '@/components/AnimatedSection';
 import FeatureCard from '@/components/FeatureCard';
 import StepCard from '@/components/StepCard';
+import TutorialVideos from '@/components/TutorialVideos';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
@@ -15,11 +17,13 @@ import {
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import ContactForm from '@/components/ContactForm';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Index() {
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   const headerRef = useRef<HTMLElement>(null);
   const heroTextRef = useRef<HTMLHeadingElement>(null);
   const heroSubtitleRef = useRef<HTMLParagraphElement>(null);
@@ -108,6 +112,24 @@ export default function Index() {
       });
     });
 
+    // Add text animation
+    const animatedTexts = document.querySelectorAll('.gsap-text');
+    
+    animatedTexts.forEach((text) => {
+      gsap.from(text, {
+        scrollTrigger: {
+          trigger: text,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        },
+        duration: 0.8,
+        opacity: 0,
+        y: 15,
+        stagger: 0.1,
+        ease: "power3.out"
+      });
+    });
+
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
@@ -130,6 +152,7 @@ export default function Index() {
           <nav className="hidden md:flex items-center gap-8">
             <a href="#features" className="text-gray-700 hover:text-clinic-500 transition-colors">Features</a>
             <a href="#howitworks" className="text-gray-700 hover:text-clinic-500 transition-colors">How It Works</a>
+            <a href="#tutorials" className="text-gray-700 hover:text-clinic-500 transition-colors">Tutorials</a>
             <a href="#download" className="text-gray-700 hover:text-clinic-500 transition-colors">Download</a>
             <a href="#contact" className="text-gray-700 hover:text-clinic-500 transition-colors">Contact</a>
           </nav>
@@ -215,7 +238,7 @@ export default function Index() {
       <section className="py-20 relative overflow-hidden bg-white gsap-section">
         <div className="container mx-auto px-4 md:px-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">Seamless Healthcare Collaboration</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-12">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-12 gsap-text">
             CliniSync brings doctors and healthcare facilities together with a secure, efficient platform.
           </p>
           
@@ -226,22 +249,22 @@ export default function Index() {
             
             <AnimatedSection delay={0.5}>
               <div className="space-y-6">
-                <div className="bg-clinic-50 p-4 rounded-xl">
+                <div className="bg-clinic-50 p-4 rounded-xl gsap-text">
                   <h3 className="font-semibold mb-2 text-clinic-700">Doctor Authentication</h3>
                   <p className="text-gray-600 text-sm">Secure sign-up with Aadhar verification and unique doctor authentication ID for trusted connections.</p>
                 </div>
                 
-                <div className="bg-clinic-50 p-4 rounded-xl">
+                <div className="bg-clinic-50 p-4 rounded-xl gsap-text">
                   <h3 className="font-semibold mb-2 text-clinic-700">Organization Verification</h3>
                   <p className="text-gray-600 text-sm">Healthcare organizations register with GSTIN for easy discovery and verification by healthcare professionals.</p>
                 </div>
                 
-                <div className="bg-clinic-50 p-4 rounded-xl">
+                <div className="bg-clinic-50 p-4 rounded-xl gsap-text">
                   <h3 className="font-semibold mb-2 text-clinic-700">QR Connection</h3>
                   <p className="text-gray-600 text-sm">Connect instantly by scanning QR codes containing authentication details for swift professional networking.</p>
                 </div>
                 
-                <div className="bg-clinic-50 p-4 rounded-xl">
+                <div className="bg-clinic-50 p-4 rounded-xl gsap-text">
                   <h3 className="font-semibold mb-2 text-clinic-700">Patient Management</h3>
                   <p className="text-gray-600 text-sm">Organizations can register patients, manage appointments, and send WhatsApp confirmations seamlessly.</p>
                 </div>
@@ -256,7 +279,7 @@ export default function Index() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
             Powerful Features for Healthcare Professionals
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16 gsap-text">
             CliniSync provides specialized tools for both doctors and healthcare organizations.
           </p>
           
@@ -306,7 +329,7 @@ export default function Index() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
             How CliniSync Works
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16 gsap-text">
             Simple steps to connect healthcare professionals with organizations.
           </p>
           
@@ -381,6 +404,22 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* Add new Tutorial Videos Section */}
+      <section id="tutorials" className="py-20 bg-gradient-to-b from-white to-clinic-50/30 gsap-section">
+        <div className="container mx-auto px-4 md:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
+            Video Tutorials
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16 gsap-text">
+            Learn how to set up and use the CliniSync app with our detailed video guides.
+          </p>
+          
+          <div className="max-w-4xl mx-auto">
+            <TutorialVideos />
+          </div>
+        </div>
+      </section>
       
       <section id="download" className="py-20 bg-gradient-to-r from-clinic-500 to-clinic-600 text-white relative overflow-hidden gsap-section">
         <div className="absolute inset-0 opacity-10">
@@ -393,7 +432,7 @@ export default function Index() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
             Get Started with CliniSync Today
           </h2>
-          <p className="text-xl opacity-90 max-w-2xl mx-auto text-center mb-12">
+          <p className="text-xl opacity-90 max-w-2xl mx-auto text-center mb-12 gsap-text">
             Download the app now and transform how you connect with healthcare professionals.
           </p>
           
@@ -415,7 +454,7 @@ export default function Index() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
             Development Team
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16 gsap-text">
             Meet the minds behind CliniSync
           </p>
           
@@ -428,17 +467,20 @@ export default function Index() {
               <p className="text-clinic-500 mb-4">Lead Developer</p>
               
               <div className="space-y-3 w-full">
-                <div className="flex items-center gap-3 text-gray-700">
-                  <Mail className="w-5 h-5 text-clinic-500" />
-                  <span>badhan.tech.museum.dev@gmail.com</span>
+                <div className="flex items-center gap-3 text-gray-700 flex-wrap">
+                  <Mail className="w-5 h-5 text-clinic-500 flex-shrink-0" />
+                  <span className="break-all">badhan.tech.museum.dev@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-700">
-                  <Phone className="w-5 h-5 text-clinic-500" />
+                  <Phone className="w-5 h-5 text-clinic-500 flex-shrink-0" />
                   <span>+91 97498 89668</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-700">
-                  <MapPin className="w-5 h-5 text-clinic-500" />
-                  <span>Tank More,Balurghat,D/Dinajpur \n WB,IN, PIN-733103</span>
+                  <MapPin className="w-5 h-5 text-clinic-500 flex-shrink-0" />
+                  <div>
+                    <p>Tank More, Balurghat</p>
+                    <p>D/Dinajpur, WB, IN, PIN-733103</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -451,7 +493,7 @@ export default function Index() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gsap-heading">
             Contact Us
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto text-center mb-16 gsap-text">
             Have questions about CliniSync? Get in touch with our team.
           </p>
           
@@ -466,17 +508,17 @@ export default function Index() {
                 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-clinic-100 flex items-center justify-center text-clinic-500">
+                    <div className="w-10 h-10 rounded-full bg-clinic-100 flex items-center justify-center text-clinic-500 flex-shrink-0">
                       <Mail className="w-5 h-5" />
                     </div>
-                    <div>
+                    <div className="overflow-hidden">
                       <h4 className="font-medium">Email</h4>
-                      <p className="text-gray-600">badhan.tech.museum.dev@gmail.com</p>
+                      <p className="text-gray-600 break-all">badhan.tech.museum.dev@gmail.com</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-clinic-100 flex items-center justify-center text-clinic-500">
+                    <div className="w-10 h-10 rounded-full bg-clinic-100 flex items-center justify-center text-clinic-500 flex-shrink-0">
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
@@ -486,7 +528,7 @@ export default function Index() {
                   </div>
                   
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-clinic-100 flex items-center justify-center text-clinic-500">
+                    <div className="w-10 h-10 rounded-full bg-clinic-100 flex items-center justify-center text-clinic-500 flex-shrink-0">
                       <MapPin className="w-5 h-5" />
                     </div>
                     <div>
@@ -522,6 +564,7 @@ export default function Index() {
               <ul className="space-y-2">
                 <li><a href="#features" className="text-gray-400 hover:text-white transition">Features</a></li>
                 <li><a href="#howitworks" className="text-gray-400 hover:text-white transition">How It Works</a></li>
+                <li><a href="#tutorials" className="text-gray-400 hover:text-white transition">Tutorials</a></li>
                 <li><a href="#download" className="text-gray-400 hover:text-white transition">Download</a></li>
                 <li><a href="#contact" className="text-gray-400 hover:text-white transition">Contact</a></li>
               </ul>
