@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ZoomIn, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -91,16 +91,32 @@ const appScreenshots = [
 ];
 
 export default function AppGallery() {
+  const imageRefs = useRef<{ [key: string]: HTMLImageElement }>({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [imagesLoaded, setImagesLoaded] = useState<{ [key: string]: boolean }>({});
+
+  // Preload all images
+  useEffect(() => {
+    appScreenshots.forEach((screenshot) => {
+      if (!imageRefs.current[screenshot.src]) {
+        const img = new Image();
+        img.onload = () => {
+          setImagesLoaded(prev => ({ ...prev, [screenshot.src]: true }));
+        };
+        img.src = screenshot.src;
+        imageRefs.current[screenshot.src] = img;
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (!isAutoPlaying || isFullscreen) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % appScreenshots.length);
-    }, 4000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [isAutoPlaying, isFullscreen]);
@@ -117,7 +133,7 @@ export default function AppGallery() {
 
   return (
     <motion.div 
-      className="h-[400px] w-full md:h-[500px] relative"
+      className="h-[500px] w-full md:h-[600px] lg:h-[650px] relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1, delay: 0.5 }}
@@ -142,23 +158,34 @@ export default function AppGallery() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -300 }}
             transition={{ duration: 0.5 }}
-            className="h-full flex items-center justify-center p-8"
+            className="h-full flex items-center justify-center p-4 md:p-8"
           >
-            <div className="relative max-w-[280px] mx-auto">
+            <div className="relative max-w-[320px] md:max-w-[350px] mx-auto">
               {/* Phone Frame */}
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-black rounded-[2.5rem] shadow-2xl transform rotate-1"></div>
                 <div className="relative bg-black rounded-[2.5rem] p-2 shadow-xl">
+                  {/* Loading placeholder */}
+                  {!imagesLoaded[currentScreenshot.src] && (
+                    <div className="w-full h-[500px] md:h-[550px] bg-gray-200 rounded-[2rem] flex items-center justify-center">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-clinic-500"></div>
+                    </div>
+                  )}
                   <img
                     src={currentScreenshot.src}
                     alt={currentScreenshot.title}
-                    className="w-full h-auto rounded-[2rem] object-cover cursor-pointer transition-transform hover:scale-105"
+                    className={`w-full h-auto rounded-[2rem] object-contain cursor-pointer transition-all duration-300 hover:scale-105 ${
+                      imagesLoaded[currentScreenshot.src] ? 'opacity-100' : 'opacity-0 absolute'
+                    }`}
                     onClick={() => setIsFullscreen(true)}
+                    style={{ maxHeight: '550px' }}
                   />
                   {/* Zoom indicator */}
-                  <div className="absolute top-4 right-4 bg-black/60 rounded-full p-2 opacity-0 hover:opacity-100 transition-opacity">
-                    <ZoomIn className="w-4 h-4 text-white" />
-                  </div>
+                  {imagesLoaded[currentScreenshot.src] && (
+                    <div className="absolute top-4 right-4 bg-black/60 rounded-full p-2 opacity-0 hover:opacity-100 transition-opacity">
+                      <ZoomIn className="w-4 h-4 text-white" />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
