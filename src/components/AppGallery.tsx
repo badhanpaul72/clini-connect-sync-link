@@ -12,19 +12,19 @@ const appScreenshots = [
   },
   {
     id: 2,
-    src: '/lovable-uploads/IMG_20250717_172407.png',
+    src: '/lovable-uploads/IMG_20250717_172741.png',
     title: 'Doctor Profile Setup',
     description: 'Complete profile creation with personal details, credentials, and medical specialization information.'
   },
   {
     id: 3,
-    src: '/lovable-uploads/IMG_20250717_172456.png',
+    src: '/lovable-uploads/IMG_20250717_172728.png',
     title: 'QR Code Scanner',
     description: 'Built-in QR code scanner to quickly connect with healthcare organizations and other professionals.'
   },
   {
     id: 4,
-    src: '/lovable-uploads/IMG_20250717_172535.png',
+    src: '/lovable-uploads/IMG_20250717_172715.png',
     title: 'Organization Search',
     description: 'Search and discover healthcare organizations by GSTIN, location, or name for professional connections.'
   },
@@ -36,55 +36,56 @@ const appScreenshots = [
   },
   {
     id: 6,
-    src: '/lovable-uploads/IMG_20250717_172640.png',
+    src: '/lovable-uploads/IMG_20250717_172353.png',
     title: 'Dashboard Overview',
     description: 'Comprehensive dashboard showing appointments, patient visits, and daily schedule at a glance.'
   },
   {
     id: 7,
-    src: '/lovable-uploads/IMG_20250717_172653.png',
+    src: '/lovable-uploads/IMG_20250717_172705.png',
     title: 'Patient Registration',
     description: 'Easy patient registration system for healthcare organizations with detailed patient information.'
   },
   {
     id: 8,
-    src: '/lovable-uploads/IMG_20250717_172705.png',
+    src: '/lovable-uploads/IMG_20250717_172640.png',
     title: 'Appointment Scheduling',
     description: 'Advanced scheduling system with calendar integration and automated WhatsApp confirmations.'
   },
   {
     id: 9,
-    src: '/lovable-uploads/IMG_20250717_172715.png',
+    src: '/lovable-uploads/IMG_20250717_172653.png',
     title: 'Visit Management',
-    description: 'Track doctor visits, mark attendance, and manage visit schedules for each healthcare organization.'
+    description: 'Track Patient visits and Complete patient medical history with visit records, treatments, and follow-up schedules.'
   },
+  
   {
     id: 10,
-    src: '/lovable-uploads/IMG_20250717_172728.png',
-    title: 'Patient History',
-    description: 'Complete patient medical history with visit records, treatments, and follow-up schedules.'
-  },
-  {
-    id: 11,
-    src: '/lovable-uploads/IMG_20250717_172741.png',
+    src: '/lovable-uploads/IMG_20250717_172407.png',
     title: 'Notification Center',
     description: 'Real-time notifications for appointments, connection requests, and important updates.'
   },
   {
-    id: 12,
-    src: '/lovable-uploads/IMG_20250717_172751.png',
+    id: 11,
+    src: '/lovable-uploads/IMG_20250717_172535.png',
     title: 'Settings & Privacy',
-    description: 'Comprehensive settings panel with privacy controls, security options, and account management.'
+    description: 'Comprehensive settings panel with privacy controls, and account management.'
+  },
+  {
+    id: 12,
+    src: '/lovable-uploads/IMG_20250717_172802.png',
+    title: 'Signup Methods',
+    description: 'Detailed Signup methods with Doctor and Organisation Option.'
   },
   {
     id: 13,
-    src: '/lovable-uploads/IMG_20250717_172802.png',
-    title: 'Reports & Analytics',
-    description: 'Detailed reports on patient visits, appointments, and practice analytics for better insights.'
+    src: '/lovable-uploads/IMG_20250717_172814.png',
+    title: 'Signup Page',
+    description: 'Just Sign up  using that page and then Verify Using email verification link and you are ready to go.'
   },
   {
     id: 14,
-    src: '/lovable-uploads/IMG_20250717_172814.png',
+    src: '/lovable-uploads/IMG_20250717_172751.png',
     title: 'Help & Support',
     description: 'Integrated help system with tutorials, FAQs, and direct support contact options.'
   }
