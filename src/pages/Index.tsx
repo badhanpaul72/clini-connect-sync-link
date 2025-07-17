@@ -141,9 +141,11 @@ export default function Index() {
       >
         <div className="container mx-auto py-4 px-4 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-clinic-500 to-clinic-400 flex items-center justify-center text-white font-bold text-xl">
-              CS
-            </div>
+              <img 
+                src="/lovable-uploads/10953cdf-eeb4-487e-9f89-843c7c04edac.png" 
+                alt="CliniSync Logo" 
+                className="w-10 h-10 object-contain"
+              />
             <span className="text-2xl font-bold text-gradient">CliniSync</span>
           </div>
           
