@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import ThreeDModel from '@/components/ThreeDModel';
+import AppGallery from '@/components/AppGallery';
 import PhoneMockup from '@/components/PhoneMockup';
 import AnimatedSection from '@/components/AnimatedSection';
 import FeatureCard from '@/components/FeatureCard';
@@ -220,7 +220,7 @@ export default function Index() {
               />
               
               <div className="relative z-10">
-                <ThreeDModel />
+                <AppGallery />
               </div>
             </div>
           </div>
