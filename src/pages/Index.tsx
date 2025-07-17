@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import AppGallery from '@/components/AppGallery';
-import PhoneMockup from '@/components/PhoneMockup';
 import AnimatedSection from '@/components/AnimatedSection';
 import FeatureCard from '@/components/FeatureCard';
 import StepCard from '@/components/StepCard';
@@ -220,7 +219,16 @@ export default function Index() {
               />
               
               <div className="relative z-10">
-                <AppGallery />
+                <motion.div 
+                  className="absolute -top-10 -left-10 w-64 h-64 bg-clinic-400/10 rounded-full animate-pulse-soft blur-3xl"
+                  animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
+                  transition={{ repeat: Infinity, duration: 8 }}
+                />
+                <motion.div 
+                  className="absolute -bottom-10 -right-10 w-64 h-64 bg-clinic-300/10 rounded-full animate-pulse-soft blur-3xl"
+                  animate={{ scale: [1, 1.2, 1], rotate: [0, -5, 0] }}
+                  transition={{ repeat: Infinity, duration: 10 }}
+                />
               </div>
             </div>
           </div>
@@ -270,7 +278,7 @@ export default function Index() {
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <AnimatedSection delay={0.3}>
-              <PhoneMockup imageSrc="/placeholder.svg" />
+              <AppGallery />
             </AnimatedSection>
             
             <AnimatedSection delay={0.5}>
