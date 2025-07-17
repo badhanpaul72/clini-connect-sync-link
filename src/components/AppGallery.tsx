@@ -5,12 +5,12 @@ import { Button } from '@/components/ui/button';
 
 const appScreenshots = [
   {
-    id: 2,
-    src: '/lovable-uploads/IMG_20250717_172353.png',
-  },
-  {
     id: 1,
     src: '/lovable-uploads/IMG_20250717_172741.png',
+  },
+  {
+    id: 2,
+    src: '/lovable-uploads/IMG_20250717_172353.png',
   },
   {
     id: 3,
